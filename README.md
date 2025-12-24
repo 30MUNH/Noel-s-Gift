@@ -1,4 +1,4 @@
-# 🎄 Vân Ang's Christmas Gift
+# 🎄Christmas Gift
 
 Một trang web tương tác chủ đề Giáng Sinh với hiệu ứng động tuyệt đẹp, được tạo ra như một món quà đặc biệt.
 
@@ -80,8 +80,6 @@ cd caythong-noel
 
 ## 💖 Được Tạo Với Tình Yêu
 
-Dự án này được thiết kế đặc biệt cho Vân Ang
-
----
 
 ⭐ Nếu bạn thích dự án này, hãy cho nó một ngôi sao trên GitHub!
+
