@@ -1,0 +1,24 @@
+# Dependency directories
+node_modules/
+packages/
+
+# Build results
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# ASP.NET
+App_Data/
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store

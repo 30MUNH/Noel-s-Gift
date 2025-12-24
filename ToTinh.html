@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vân Ang's Special Message</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- Sử dụng font Noel từ trang cũ -->
+    <link href="https://fonts.cdnfonts.com/css/great-vibes" rel="stylesheet">
+
+    <!-- CSS riêng cho trang tỏ tình -->
+    <link href="./style6.css" rel="stylesheet" />
+
+    <!-- Sử dụng hiệu ứng tuyết từ trang cũ -->
+    <link href="./style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Hiệu ứng tuyết rơi (giống trang HopQua.html) -->
+    <div class="snow-container">
+        <div class="snow foreground"></div>
+        <div class="snow foreground layered"></div>
+        <div class="snow middleground"></div>
+        <div class="snow middleground layered"></div>
+        <div class="snow background"></div>
+        <div class="snow background layered"></div>
+    </div>
+
+    <!-- Container chính -->
+    <div class="confession-container">
+        <div class="confession-card">
+            <!-- Tiêu đề -->
+            <h1 class="confession-title">💝 Giải pháp cho bạn 💝</h1>
+
+            <!-- Khu vực text tỏ tình -->
+            <div class="confession-text-container">
+                <p id="confession-text" class="confession-text"><span id="typing-cursor" class="typing-cursor">|</span>
+                </p>
+            </div>
+
+            <!-- Buttons Yes/No -->
+            <div id="button-container" class="button-container" style="display: none;">
+                <button id="btn-yes" class="btn btn-yes">
+                    <span class="btn-icon">❤️</span>
+                    <span class="btn-text">Yes! 💕</span>
+                </button>
+                <button id="btn-no" class="btn btn-no">
+                    <span class="btn-icon">😅</span>
+                    <span class="btn-text">No...</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success message (ẩn ban đầu) -->
+    <div id="success-message" class="success-message" style="display: none;">
+        <div class="success-card">
+            <h1 class="success-title">🎉 Yayyy! 🎉</h1>
+            <p class="success-text">Cảm ơn câu trả lời của bạn! ❤️</p>
+            <div class="hearts-animation">
+                <span class="heart">❤️</span>
+                <span class="heart">💕</span>
+                <span class="heart">💖</span>
+                <span class="heart">💝</span>
+                <span class="heart">💗</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Script riêng cho trang tỏ tình -->
+    <script src="./script3.js"></script>
+</body>
+
+</html>
