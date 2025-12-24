@@ -31,25 +31,30 @@ function giftOpen() {
         }, 500);
         // Hiển thị cây thông TRƯỚC (1 giây sau khi click)
         setTimeout(function () {
-            jQuery("#merry").fadeIn(1500);
+            jQuery("#merry").removeAttr("hidden").css({
+                "display": "block",
+                "opacity": "0",
+                "visibility": "visible"
+            }).animate({ opacity: 1 }, 1500);
         }, 1000);
 
         // Hiển thị người tuyết VÀ nai CÙNG LÚC (3 giây sau khi click)
         setTimeout(function () {
-            jQuery("#box").fadeIn(1000);  // Người tuyết
-            jQuery("#houu").fadeIn(1000); // Nai (sẽ hiện ở lớp trên)
+            jQuery("#box").removeAttr("hidden").css({
+                "display": "block",
+                "opacity": "0",
+                "visibility": "visible"
+            }).animate({ opacity: 1 }, 1000);
+
+            jQuery("#houu").removeAttr("hidden").css({
+                "display": "block",
+                "opacity": "0",
+                "visibility": "visible"
+            }).animate({ opacity: 1 }, 1000);
 
             // Sau khi TẤT CẢ animation hiện xong, enable click để chuyển trang
             enablePageTransition();
         }, 3000);
-
-        // Hiển thị người tuyết CUỐI CÙNG (5 giây sau khi click)
-        setTimeout(function () {
-            jQuery("#box").fadeIn(1000);
-
-            // Sau khi TẤT CẢ animation hiện xong, enable click để chuyển trang
-            enablePageTransition();
-        }, 5000);
         //jQuery(".gift-card-text").fadeIn(5000);
 
     });

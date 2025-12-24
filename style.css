@@ -8,6 +8,15 @@ body {
     backface-visibility: hidden;
 }
 
+/* Ensure animation elements are hidden initially */
+#merry,
+#box,
+#houu {
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
 .gift {
     position: absolute;
     top: 50%;
