@@ -4,11 +4,7 @@ var TIMEOUT_DURATION = 10000; // 10 giây
 
 jQuery(document).ready(function () {
     // ẨN TẤT CẢ ELEMENTS NGAY KHI TRANG LOAD
-    jQuery("#merry, #box, #houu").hide().css({
-        "display": "none",
-        "opacity": "0",
-        "visibility": "hidden"
-    });
+    jQuery("#merry, #box, #houu").hide();
 
     giftOpen();
 });
@@ -38,26 +34,13 @@ function giftOpen() {
         }, 500);
         // Hiển thị cây thông TRƯỚC (1 giây sau khi click)
         setTimeout(function () {
-            jQuery("#merry").removeAttr("hidden").css({
-                "display": "block",
-                "opacity": "0",
-                "visibility": "visible"
-            }).animate({ opacity: 1 }, 1500);
+            jQuery("#merry").fadeIn(1500);
         }, 1000);
 
         // Hiển thị người tuyết VÀ nai CÙNG LÚC (3 giây sau khi click)
         setTimeout(function () {
-            jQuery("#box").removeAttr("hidden").css({
-                "display": "block",
-                "opacity": "0",
-                "visibility": "visible"
-            }).animate({ opacity: 1 }, 1000);
-
-            jQuery("#houu").removeAttr("hidden").css({
-                "display": "block",
-                "opacity": "0",
-                "visibility": "visible"
-            }).animate({ opacity: 1 }, 1000);
+            jQuery("#box").fadeIn(1000);
+            jQuery("#houu").fadeIn(1000);
 
             // Sau khi TẤT CẢ animation hiện xong, enable click để chuyển trang
             enablePageTransition();
