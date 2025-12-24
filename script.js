@@ -3,6 +3,13 @@ var giftClickTime = null;
 var TIMEOUT_DURATION = 10000; // 10 giây
 
 jQuery(document).ready(function () {
+    // ẨN TẤT CẢ ELEMENTS NGAY KHI TRANG LOAD
+    jQuery("#merry, #box, #houu").hide().css({
+        "display": "none",
+        "opacity": "0",
+        "visibility": "hidden"
+    });
+
     giftOpen();
 });
 
