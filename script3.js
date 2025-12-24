@@ -1,5 +1,5 @@
 // ===== CẤU HÌNH =====
-const CONFESSION_TEXT = "Hôm trước bạn bảo mâu thuẫn vì cô đơn nhưng mà không muốn yêu ai. Lý do là không yêu thì chán, còn yêu thì phiền. Tôi bảo là sẽ đưa cho bạn 1 phương án. Định nay gặp thì nói nhưng mà nay bạn có lịch rồi nên tôi sẽ để trên đây. Bạn nghĩ sao về tôi? Tôi muốn bắt đầu tìm hiểu bạn với tư cách là 2 nam nữ tìm hiểu yêu nhau mà không phải là bạn bè. Câu trả lời của bạn là gì?";
+const CONFESSION_TEXT = "Hôm trước bạn bảo mâu thuẫn vì cô đơn nhưng mà không muốn yêu ai. Lý do là không yêu thì chán, còn yêu thì phiền. Tôi bảo là sẽ đưa cho bạn 1 phương án. Định nay gặp thì nói nhưng mà nay bạn có lịch rồi nên tôi sẽ để trên đây. Bạn nghĩ sao về tôi? Tôi muốn bắt đầu tìm hiểu bạn với tư cách là nam nữ tìm hiểu yêu nhau mà không phải là bạn bè. Câu trả lời của bạn là gì?";
 
 const TYPING_SPEED = 50; // milliseconds mỗi ký tự
 const BUTTON_SHOW_DELAY = 1000; // delay sau khi typing xong mới hiện buttons
