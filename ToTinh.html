@@ -76,6 +76,60 @@
 
     <!-- Script riêng cho trang tỏ tình -->
     <script src="./script3.js"></script>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop autoplay>
+        <source src="./audio/Alex-Productions - Classical Gentle _ Romantic Love.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button -->
+    <div class="music-toggle" id="music-toggle" title="Click to play/pause music">
+        <span class="icon">🔊</span>
+    </div>
+
+    <script>
+        // Music toggle functionality
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const icon = musicToggle.querySelector('.icon');
+        let isPlaying = true; // Assume autoplay works
+
+        // Try to ensure music is playing after page load
+        window.addEventListener('DOMContentLoaded', function () {
+            // Check if music is actually playing
+            setTimeout(() => {
+                if (bgMusic.paused) {
+                    // Autoplay was blocked
+                    isPlaying = false;
+                    icon.textContent = '🔇';
+                    musicToggle.classList.remove('playing');
+                } else {
+                    // Music is playing
+                    isPlaying = true;
+                    icon.textContent = '🔊';
+                    musicToggle.classList.add('playing');
+                }
+            }, 100);
+        });
+
+        musicToggle.addEventListener('click', function () {
+            if (isPlaying) {
+                bgMusic.pause();
+                icon.textContent = '🔇';
+                musicToggle.classList.remove('playing');
+            } else {
+                bgMusic.play().catch(err => {
+                    console.log('Audio playback failed:', err);
+                });
+                icon.textContent = '🔊';
+                musicToggle.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Set initial volume
+        bgMusic.volume = 0.4; // Slightly lower volume for romantic music
+    </script>
 </body>
 
 </html>

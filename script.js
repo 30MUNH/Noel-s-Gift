@@ -1,6 +1,6 @@
 // Biến lưu thời gian bắt đầu và thời gian timeout
 var giftClickTime = null;
-var TIMEOUT_DURATION = 10000; // 10 giây
+var TIMEOUT_DURATION = 12000; // 12 giây
 
 jQuery(document).ready(function () {
     // ẨN TẤT CẢ ELEMENTS NGAY KHI TRANG LOAD
@@ -37,14 +37,14 @@ function giftOpen() {
             jQuery("#merry").fadeIn(1500);
         }, 1000);
 
-        // Hiển thị người tuyết VÀ nai CÙNG LÚC (3 giây sau khi click)
+        // Hiển thị người tuyết VÀ nai CÙNG LÚC (6 giây sau khi click - tăng từ 3s lên 6s)
         setTimeout(function () {
             jQuery("#box").fadeIn(1000);
             jQuery("#houu").fadeIn(1000);
 
             // Sau khi TẤT CẢ animation hiện xong, enable click để chuyển trang
             enablePageTransition();
-        }, 3000);
+        }, 6000);
         //jQuery(".gift-card-text").fadeIn(5000);
 
     });

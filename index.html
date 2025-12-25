@@ -14,6 +14,84 @@
     <link href="./style3.css" rel="stylesheet" />
     <link href="./style4.css" rel="stylesheet" />
     <link href="./style5.css" rel="stylesheet" />
+
+    <!-- Music Toggle Button Styles -->
+    <style>
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(200, 50, 50, 0.3);
+            animation: musicPulse 2s ease-in-out infinite;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(200, 50, 50, 0.5);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .music-toggle .icon {
+            font-size: 26px;
+            transition: transform 0.3s ease;
+        }
+
+        .music-toggle.playing .icon {
+            animation: rotate 0.3s ease;
+        }
+
+        @keyframes musicPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 8px 32px rgba(200, 50, 50, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 40px rgba(200, 50, 50, 0.6);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .music-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .music-toggle .icon {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -635,6 +713,182 @@
 
         <script src="./script.js"></script>
         <script src="./script2.js"></script>
+
+        <!-- Background Music -->
+        <audio id="bg-music" loop autoplay>
+            <source src="./audio/Dee Yan-Key - We Wish You a Merry Christmas.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Music Toggle Button -->
+        <div class="music-toggle" id="music-toggle" title="Click to play/pause music">
+            <span class="icon">🔊</span>
+        </div>
+
+        <!-- Click to Start Overlay (only for first visit) -->
+        <div id="click-to-start-overlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        ">
+            <div style="
+                text-align: center;
+                color: white;
+                font-family: 'Great Vibes', cursive;
+                animation: pulseText 2s ease-in-out infinite;
+            ">
+                <div style="font-size: 4rem; margin-bottom: 20px;">🎵</div>
+                <div style="font-size: 2.5rem; text-shadow: 0 0 20px rgba(255,255,255,0.5);">Click anywhere to start
+                    music</div>
+                <div style="font-size: 1.2rem; margin-top: 10px; opacity: 0.7;">Tap to enjoy the Christmas spirit!</div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes pulseText {
+
+                0%,
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                50% {
+                    transform: scale(1.05);
+                    opacity: 0.9;
+                }
+            }
+        </style>
+
+        <script>
+            // Music continuity and toggle functionality with first-time autoplay helper
+            const bgMusic = document.getElementById('bg-music');
+            const musicToggle = document.getElementById('music-toggle');
+            const icon = musicToggle.querySelector('.icon');
+            const clickOverlay = document.getElementById('click-to-start-overlay');
+            let isPlaying = true;
+
+            // Function to save music state to localStorage
+            function saveMusicState() {
+                if (!bgMusic.paused) {
+                    localStorage.setItem('musicPlaying', 'true');
+                    localStorage.setItem('musicTime', bgMusic.currentTime.toString());
+                    localStorage.setItem('musicVolume', bgMusic.volume.toString());
+                } else {
+                    localStorage.setItem('musicPlaying', 'false');
+                }
+            }
+
+            // Function to load music state from localStorage
+            function loadMusicState() {
+                const wasPlaying = localStorage.getItem('musicPlaying') === 'true';
+                const savedTime = parseFloat(localStorage.getItem('musicTime') || '0');
+                const savedVolume = parseFloat(localStorage.getItem('musicVolume') || '0.5');
+
+                bgMusic.volume = savedVolume; // Always set volume
+
+                if (wasPlaying) {
+                    bgMusic.currentTime = savedTime;
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        icon.textContent = '🔊';
+                        musicToggle.classList.add('playing');
+                    }).catch(err => {
+                        console.log('Could not auto-resume music:', err);
+                        isPlaying = false;
+                        icon.textContent = '🔇';
+                        musicToggle.classList.remove('playing');
+                    });
+                } else {
+                    // If it was explicitly paused, ensure it stays paused and update UI
+                    bgMusic.pause();
+                    isPlaying = false;
+                    icon.textContent = '🔇';
+                    musicToggle.classList.remove('playing');
+                }
+            }
+
+            // Save state periodically while playing
+            setInterval(saveMusicState, 500);
+
+            // Save state before page unload
+            window.addEventListener('beforeunload', saveMusicState);
+
+            // Function to show click-to-start overlay when needed
+            function showOverlayIfNeeded() {
+                // Check if music is actually playing
+                setTimeout(() => {
+                    if (bgMusic.paused) {
+                        // Music is not playing, show overlay
+                        clickOverlay.style.display = 'flex';
+                    } else {
+                        // Music is playing, hide overlay  
+                        clickOverlay.style.display = 'none';
+                    }
+                }, 200);
+            }
+
+            // Handle overlay click to start music
+            clickOverlay.addEventListener('click', function () {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    icon.textContent = '🔊';
+                    musicToggle.classList.add('playing');
+                    localStorage.setItem('musicPlaying', 'true');
+                }).catch(err => console.log('Play failed:', err));
+
+                // Hide overlay
+                clickOverlay.style.display = 'none';
+            });
+
+            // Load previous state on page load
+            window.addEventListener('DOMContentLoaded', function () {
+                loadMusicState();
+
+                // Check if overlay should be shown (if music failed to autoplay)
+                showOverlayIfNeeded();
+
+                // Also check if autoplay worked
+                setTimeout(() => {
+                    if (bgMusic.paused && localStorage.getItem('musicPlaying') !== 'true') {
+                        isPlaying = false;
+                        icon.textContent = '🔇';
+                        musicToggle.classList.remove('playing');
+                    } else if (!bgMusic.paused) {
+                        isPlaying = true;
+                        icon.textContent = '🔊';
+                        musicToggle.classList.add('playing');
+                    }
+                }, 100);
+            });
+
+            musicToggle.addEventListener('click', function () {
+                if (isPlaying) {
+                    bgMusic.pause();
+                    icon.textContent = '🔇';
+                    musicToggle.classList.remove('playing');
+                    localStorage.setItem('musicPlaying', 'false'); // Explicitly save paused state
+                } else {
+                    bgMusic.play().catch(err => {
+                        console.log('Audio playback failed:', err);
+                    });
+                    icon.textContent = '🔊';
+                    musicToggle.classList.add('playing');
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // Set initial volume
+            bgMusic.volume = 0.5;
+        </script>
 </body>
 
 </html>
