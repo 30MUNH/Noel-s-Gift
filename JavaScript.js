@@ -12,19 +12,24 @@
             })
         })(); (function () { k = gsap.timeline({ onUpdate: t }); k.to(".pContainer, .sparkle", { duration: 6, motionPath: { path: ".treePath", autoRotate: !1 }, ease: "linear" }).to(".pContainer, .sparkle", { duration: 1, onStart: function () { e = !1 }, x: q[0].x, y: q[0].y }).to(".pContainer, .sparkle", { duration: 2, onStart: function () { e = !0 }, motionPath: { path: ".treeBottomPath", autoRotate: !1 }, ease: "linear" }, "-=0").from(".treeBottomMask", { duration: 2, drawSVG: "0% 0%", stroke: "#FFF", ease: "linear" }, "-=2") })(); c.from([".treePathMask",
             ".treePotMask"], { drawSVG: "0% 0%", stroke: "#FFF", stagger: { each: 6 }, duration: gsap.utils.wrap([6, 1, 2]), ease: "linear" }).from(".treeStar", { duration: 3, scaleY: 0, scaleX: .15, transformOrigin: "50% 50%", ease: "elastic(1,0.5)" }, "-=4").to(".sparkle", { duration: 3, opacity: 0, ease: "rough({strength: 2, points: 100, template: linear, taper: both, randomize: true, clamp: false})" }, "-=0").to(".treeStarOutline", { duration: 1, opacity: 1, ease: "rough({strength: 2, points: 16, template: linear, taper: none, randomize: true, clamp: false})" },
-                "+=1"); c.add(k, 0); gsap.globalTimeline.timeScale(1.5); k.vars.onComplete = function () {
-                    // Hiện dòng "Merry Christmas" TRƯỚC
-                    gsap.to('#endMessage', {
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.out",
-                        onComplete: function () {
-                            // Sau khi "Merry Christmas" đã hiện xong, đợi 5 giây rồi hiện popup overlay
-                            setTimeout(function () {
-                                // Thêm class 'show' để trigger CSS animation
-                                document.getElementById('popup-overlay').classList.add('show');
-                            }, 5000);
-                        }
-                    });
-                }
+                "+=1"); c.add(k, 0); gsap.globalTimeline.timeScale(1.5);
+
+    // ===== Callback sau khi animation cây thông hoàn thành =====
+    k.vars.onComplete = function () {
+        // Hiện dòng "Merry Christmas" (ĐANG HOẠT ĐỘNG)
+        gsap.to('#endMessage', {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+
+            // ===== COMMENTED OUT: Logic hiện button "Special Message" =====
+            // onComplete: function () {
+            //     // Sau khi "Merry Christmas" đã hiện xong, đợi 5 giây rồi hiện popup overlay
+            //     setTimeout(function () {
+            //         // Thêm class 'show' để trigger CSS animation
+            //         document.getElementById('popup-overlay').classList.add('show');
+            //     }, 5000);
+            // }
+        });
+    }
 })();
